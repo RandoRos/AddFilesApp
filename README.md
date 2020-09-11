@@ -1,11 +1,35 @@
-# Accept file app
+# Accept file App
 This is a test assignment for `Senior Javascript Engineer` position.
 
 App will allow to upload file and case file is PE (Portable Executable) it will be stored into server side storage and its metric data will be stored in fast NoSQL database.
 
 Duplicate files are not allowed.
 
-#### Integration with AWS
+#### Stack
+- NodeJS/Express (ES6)
+- React + React-Bootstrap
+- Bable/Webpack integration
+- AWS integration (S3, DynamoDB, Lambda, ECS, EC2)
+- Docker ready
+
+API and Front End will run on same container/instance.
+
+#### API
+
+API is simple and using 2 endpoints:
+
+`/upload` - POST endpoint for file uploading. Maximum allowed file size is 10MB.
+`/list` - GET endpoint to get all records from DynamoDB
+
+#### Get Started
+
+1. Install dependencies `npm install`.
+2. Add AWS credentials into `/config/aws.example.js` and remove keyword `example` from file name.
+2. Build `bundle.js` with using webpack, for React front-end. `npm run build`.
+3. Run App and Express server `npm start`.
+
+##
+### Integration with AWS
 
 We know that integration with AWS nowadays is way to move forward. I could've implement everything using regular server based architecture in mind. Instead I think we should move forward towards serverless and so I decided to use AWS integration.
 
@@ -15,7 +39,7 @@ Reason choosing DynamoDB is that my initial idea was to use some kind of hash ta
 
 #### Lambda
 
-Lambda function that will be triggered once S3 put event triggers will look like:
+Lambda function that will be triggered once S3 write event triggers, which is writing file logs into DynamoDB.
 
 ```javascript
 exports.handler = async (event) => {
@@ -43,8 +67,7 @@ exports.handler = async (event) => {
   };
 };
 ```
-App also has `Dockerfile` to create docker container.
 
-App has also simple React front page
+### Questions?
 
-### API
+Contact me or via [LinkedIn](https://www.linkedin.com/in/rando-rostok-msc-a1118a161)
