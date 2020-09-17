@@ -18,8 +18,8 @@ API and Front End will run on same container/instance.
 
 API is simple and using 2 endpoints:
 
-`/upload` - POST endpoint for file uploading. Maximum allowed file size is 10MB.
-`/list` - GET endpoint to get all records from DynamoDB
+- `/upload` - POST endpoint for file uploading. Maximum allowed file size is 10MB.
+- `/list` - GET endpoint to get all records from DynamoDB
 
 #### Get Started
 
@@ -33,7 +33,7 @@ API is simple and using 2 endpoints:
 
 We know that integration with AWS nowadays is way to move forward. I could've implement everything using regular server based architecture in mind. Instead I think we should move forward towards serverless and so I decided to use AWS integration.
 
-AWS integration is done using `AWS S3` for file storage using *Expire rule*. Once file is uploaded into Storage, it will fire event for `AWS Lambda`, which will automatically write file metric data into `AWS DynamoDB`.
+AWS integration is done using `AWS S3` for file storage using *Expire rule*. Once file is uploaded into Storage, it will fire event for `AWS Lambda`, which will automatically write file metric data into `AWS DynamoDB` and by using TTL functionality there, data will be up to date.
 
 Reason choosing DynamoDB is that my initial idea was to use some kind of hash table in terms of access speed. I thought about using Redis but then when I started to think about AWS integration and about using S3 for files I thought why not use DynamoDB as well.
 
@@ -55,7 +55,7 @@ exports.handler = async (event) => {
       name: { S: head.Metadata.filename },
       size: { S: head.ContentLength.toString() },
       type: { S: head.ContentType },
-      expires_at: { S: head.Expires.toString() },
+      expires_at : { N: (new Date(head.Expires).valueOf() / 1000).toString()},
     },
   };
 

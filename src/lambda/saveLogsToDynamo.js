@@ -16,7 +16,7 @@ exports.handler = async (event) => {
       name: { S: head.Metadata.filename },
       size: { S: head.ContentLength.toString() },
       type: { S: head.ContentType },
-      expires_at : {N: (new Date(head.Expires).valueOf() / 1000).toString()},
+      expires_at : { N: (new Date(head.Expires).valueOf() / 1000).toString()},
     },
   };
 
