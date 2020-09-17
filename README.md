@@ -1,5 +1,5 @@
 # Accept file App
-This is a test assignment for `Senior Javascript Engineer` position.
+This is a test assignment.
 
 App will allow to upload file and case file is PE (Portable Executable) it will be stored into server side storage and its metric data will be stored in fast NoSQL database.
 

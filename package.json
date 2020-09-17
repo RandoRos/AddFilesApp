@@ -1,7 +1,7 @@
 {
   "name": "malwarebytes-assignment",
   "version": "1.0.0",
-  "description": "Malwarebytes home assignment for accept file",
+  "description": "App that accepts PE files",
   "main": "src/index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon -r esm src/index.js",
